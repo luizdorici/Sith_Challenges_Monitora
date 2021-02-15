@@ -17,16 +17,18 @@ public class AuthorController {
         return db.readAll();
     }
 
-    // Challenge 1
+    // Challenge 3
     @RequestMapping(value = "/authors/{id}", method = RequestMethod.GET)
-    public String findById(@PathVariable int id, @RequestParam String author) {
-        return "Welcome to the Sith Order, "+ author +", your id is: " + id;
+    public Author findById(@PathVariable int id) {
+        DaoAuthor db = new DaoAuthor();
+        return db.read(id);
     }
 
-    //Challenge 2
+    //Challenge 3
     @PostMapping(value = "/authors")
-    public String insert(@RequestBody Author obj) {
-        return obj.getName() + " was born in " + obj.getBirth();
+    public boolean insert(@RequestBody Author obj) {
+        DaoAuthor db = new DaoAuthor();
+        return db.insert(obj);
     }
 
     @RequestMapping(value = "/authors", method = RequestMethod.PUT)

@@ -72,6 +72,25 @@ public class DaoAuthor {
         return null;
     }
 
+    public boolean insert(Author aux) {
+        Database db = new Database();
+        Connection con = db.getConnection();
+
+        String sql="INSERT INTO AUTHOR (NAME_, BIRTH) VALUES (?, ?)";
+        try {
+            PreparedStatement query = con.prepareStatement(sql);
+            query.setString(1, aux.getName());
+            query.setDate(2, aux.getBirth());
+            query.execute();
+            query.close();
+            return true;
+        }catch(SQLException e) {
+            System.out.println("Error on insert, DaoAuthor: " + e);
+        }
+
+        return false;
+    }
+
     public boolean update(Author aux){
 
         Database db = new Database();
