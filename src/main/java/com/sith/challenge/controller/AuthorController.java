@@ -20,8 +20,14 @@ public class AuthorController {
     // Challenge 1
     @RequestMapping(value = "/authors/{id}", method = RequestMethod.GET)
     public String findById(@PathVariable int id, @RequestParam String author) {
-        DaoAuthor db = new DaoAuthor();
+        //DaoAuthor db = new DaoAuthor();
         return "Welcome to the Sith Order, "+ author +", your id is: " + id;
+    }
+
+    @PostMapping(value = "/authors")
+    public String insert(@RequestBody Author obj) {
+        //DaoAuthor db = new DaoAuthor();
+        return obj.getName() + " was born in " + obj.getBirth();
     }
 
     @RequestMapping(value = "/authors", method = RequestMethod.PUT)
