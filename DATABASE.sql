@@ -9,6 +9,18 @@ BIRTH   DATE,
 PRIMARY KEY(ID)
 );
 
+CREATE TABLE BOOK(
+    ID INTEGER AUTO_INCREMENT,
+    TITLE VARCHAR(50),
+    AUTHOR VARCHAR(40),
+    EDITION VARCHAR(50),
+    PRIMARY KEY(ID)
+);
+
 INSERT INTO AUTHOR (NAME_, BIRTH) VALUES ("Marka Ragnos", "1560-01-03");
 INSERT INTO AUTHOR (NAME_, BIRTH) VALUES ("Dathka Graush", "1720-05-02");
 INSERT INTO AUTHOR (NAME_, BIRTH) VALUES ("Naga Sadow", "1800-12-06");
+
+INSERT INTO BOOK (TITLE, AUTHOR, EDITION) VALUES ("The Golden Age of the Sith", "Naga Sadow", "3rd edition");
+INSERT INTO BOOK (TITLE, AUTHOR, EDITION) VALUES ("Jedi Academy", "Marka Ragnos", "1st edition");
+INSERT INTO BOOK (TITLE, AUTHOR, EDITION) VALUES ("The Fall  the Sith Empire", "Naga Sadow", "2nd ofedition");
