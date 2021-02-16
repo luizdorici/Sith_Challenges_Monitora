@@ -26,7 +26,7 @@ public class DaoBook {
             query.close();
             return aux;
         }catch(SQLException e){
-            System.out.println("Error on read, DaoAuthor: " + e);
+            System.out.println("Error on read, DaoBook: " + e);
         }
         return null;
     }
@@ -48,9 +48,29 @@ public class DaoBook {
             query.close();
             return list;
         }catch(SQLException e){
-            System.out.println("Error on readAll, DaoAuthor: " + e);
+            System.out.println("Error on readAll, DaoBook: " + e);
         }
         return null;
+    }
+
+    public boolean insert(Book aux) {
+        Database db = new Database();
+        Connection con = db.getConnection();
+
+        String sql="INSERT INTO BOOK (TITLE, EDITION, AUTHOR_ID) VALUES (?, ?, ?)";
+        try {
+            PreparedStatement query = con.prepareStatement(sql);
+            query.setString(1, aux.getTitle());
+            query.setString(2, aux.getEdition());
+            query.setInt(3, aux.getAuthor_id());
+            query.execute();
+            query.close();
+            return true;
+        }catch(SQLException e) {
+            System.out.println("Error on insert, DaoBook: " + e);
+        }
+
+        return false;
     }
 
     public Book getBookFromResultSet(ResultSet rs) {
@@ -59,7 +79,7 @@ public class DaoBook {
         try {
             aux.setId(rs.getInt("ID"));
             aux.setTitle(rs.getString("TITLE"));
-            aux.setAuthor(rs.getString("AUTHOR"));
+            aux.setAuthor_id(rs.getInt("AUTHOR_ID"));
             aux.setEdition(rs.getString("EDITION"));
             return aux;
         }catch(SQLException e){

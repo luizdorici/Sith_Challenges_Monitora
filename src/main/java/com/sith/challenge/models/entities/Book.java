@@ -4,17 +4,10 @@ public class Book {
 
     private int id;
     private String title;
-    private String author;
+    private int author_id;
     private String edition;
 
     public Book() {
-    }
-
-    public Book(int id, String title, String author, String edition) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.edition = edition;
     }
 
     public int getId() {
@@ -33,12 +26,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public int getAuthor_id() {
+        return author_id;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthor_id(int author_id) {
+        this.author_id = author_id;
     }
 
     public String getEdition() {
