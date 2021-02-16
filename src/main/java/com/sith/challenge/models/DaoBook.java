@@ -53,6 +53,30 @@ public class DaoBook {
         return null;
     }
 
+    public List<Book> readAllBooksFromAuthor(int id){
+
+        Database db = new Database();
+        Connection con = db.getConnection();
+
+        String sql= "SELECT * FROM BOOK WHERE AUTHOR_ID = ?";
+
+        try {
+            PreparedStatement query = con.prepareStatement(sql);
+            query.setInt(1, id);  //protection against sql injection
+            ResultSet rs = query.executeQuery();
+            List<Book> list = new ArrayList<Book>();
+            while(rs.next()){
+                list.add(getBookFromResultSet(rs));
+            }
+            rs.close();
+            query.close();
+            return list;
+        }catch(SQLException e) {
+            System.out.println("Error on read, DaoBook: " + e);
+        }
+        return null;
+    }
+
     public boolean insert(Book aux) {
         Database db = new Database();
         Connection con = db.getConnection();
@@ -70,6 +94,44 @@ public class DaoBook {
             System.out.println("Error on insert, DaoBook: " + e);
         }
 
+        return false;
+    }
+
+    public boolean update(Book aux){
+
+        Database db = new Database();
+        Connection con = db.getConnection();
+
+        String sql="UPDATE BOOK SET TITLE = ?  WHERE ID = ?";
+        try{
+            PreparedStatement query = con.prepareStatement(sql);
+
+            query.setString(1, aux.getTitle());  //protection against sql injection
+            query.setInt(2, aux.getId());    //protection against sql injection
+            query.execute();
+            query.close();
+            return true;
+
+        }catch(SQLException e){
+            System.out.println("Error on update, DaoBook: " + e);
+        }
+        return false;
+    }
+
+    public boolean delete(int id) {
+
+        Database db = new Database();
+        Connection con = db.getConnection();
+        String sql = "DELETE FROM BOOK WHERE ID = ?";
+        try {
+            PreparedStatement query = con.prepareStatement(sql);
+            query.setInt(1, id);
+            query.execute();
+            query.close();
+            return true;
+        }catch(SQLException e){
+            System.out.println("Error on delete, DaoBook: " + e);
+        }
         return false;
     }
 
