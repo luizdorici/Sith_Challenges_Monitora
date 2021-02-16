@@ -19,7 +19,8 @@ public class BookController {
     }
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public List<Book> getBooks(@RequestParam int author_id){
+    public List<Book> getBooksFromAuthor(@RequestParam int author_id){
+        System.out.println("Author ID: " + author_id);
         DaoBook db = new DaoBook();
         return db.readAll();
     }
